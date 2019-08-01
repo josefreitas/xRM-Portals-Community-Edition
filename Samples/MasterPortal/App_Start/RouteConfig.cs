@@ -3,6 +3,7 @@
   Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Adxstudio.Xrm.Web.Handlers;
@@ -21,7 +22,15 @@ namespace Site
 				r.IgnoreRoute("js/{resource}.bundle.js");
 
 				r.Add(new Route("{area}/about", null, new RouteValueDictionary(new { area = "_services" }), new AboutProductHandler()));
-			});
+
+               
+
+                r.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new {id = RouteParameter.Optional});
+
+            });
 		}
 	}
 }

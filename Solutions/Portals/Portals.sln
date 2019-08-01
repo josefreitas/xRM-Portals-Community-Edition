@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterPortal", "..\..\Samples\MasterPortal\MasterPortal.csproj", "{530E8ABE-6436-44BB-9A8D-EED6542C83B9}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Xrm.Portal", "..\..\Framework\Microsoft.Xrm.Portal\Microsoft.Xrm.Portal.csproj", "{9293D3F9-A840-4D3C-98D9-AA0C7343DF6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Xrm.Portal.Files", "..\..\Framework\Microsoft.Xrm.Portal.Files\Microsoft.Xrm.Portal.Files.csproj", "{444776B5-4638-4800-9466-0E6F19EA9B93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{E8DF76D3-CEF4-4C44-A1E0-BDFC28F6D035}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,5 +117,8 @@ Global
 		{2CAE24B8-C584-43F6-B299-F93638446C6F} = {8F1B88F6-3F00-44DE-9E5A-17FADC6E526A}
 		{9293D3F9-A840-4D3C-98D9-AA0C7343DF6F} = {8F1B88F6-3F00-44DE-9E5A-17FADC6E526A}
 		{444776B5-4638-4800-9466-0E6F19EA9B93} = {8F1B88F6-3F00-44DE-9E5A-17FADC6E526A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76340D33-9A3C-4778-A33E-222BB869ABE0}
 	EndGlobalSection
 EndGlobal
