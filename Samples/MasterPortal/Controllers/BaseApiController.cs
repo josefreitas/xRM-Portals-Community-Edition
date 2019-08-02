@@ -22,13 +22,14 @@ namespace Site.Controllers
         public enum TypeOfReport
         {
             NotSet=0,
-            ReportFichaRegistoJornalistica =1,
-            ReportFichaRegistoNoticiosa=2,
-            ReportFichaRegistoDistribuicao=3,
-            ReportFichaRegistoOperadorRadio=4,
-            ReportFichaRegistoTelevisao=5,
-            ReportFichaRegistoPublicacaoPeriodica=6,
-            ReportFichaRegistoPrgDistExclInternet=7
+            ReportFichaRegistoJornalistica = 1,
+            ReportFichaRegistoNoticiosa = 2,
+            ReportFichaRegistoDistribuicao = 3,
+            ReportFichaRegistoOperadorRadio = 4,
+            ReportFichaRegistoTelevisao = 5,
+            ReportFichaRegistoPublicacaoPeriodica = 6,
+            ReportFichaRegistoPrgDistExclInternet = 7,
+            GetSGDDocument = 8
         }
 
         [NonAction]
@@ -54,7 +55,7 @@ namespace Site.Controllers
         }
 
         [NonAction]
-        public HttpResponseMessage SendRequestToReportToPdf(Method method,string serviceName, Parameter[] parameters)
+        public virtual HttpResponseMessage SendRequest(Method method,string serviceName, Parameter[] parameters)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
@@ -64,7 +65,30 @@ namespace Site.Controllers
             var request = new RestRequest(serviceName, Method.GET);
             request.Parameters.AddRange(parameters);
 
-           // request.AddParameter("livroRegistosId", livroRegistosId);
+
+            request.AddHeader(CapgeminiPortalERCSGDWebApiHeader, CapgeminiPortalERCSGDWebApiToken);
+            var response = client.Get(request);
+
+            if (response.RawBytes.Length == 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent, "Arquivo não contém informações");
+            }
+
+            return GetResponse(response.RawBytes, response.Headers.FirstOrDefault(w => w.Name == "filename").ToString());
+        }
+      
+
+        public HttpResponseMessage SendRequestToReportToPdf(Method method, string serviceName, Parameter[] parameters)
+        {
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+
+            var client = new RestClient(CapgeminiPortalERCSGDWebApi);
+
+            var request = new RestRequest(serviceName, Method.GET);
+            request.Parameters.AddRange(parameters);
+
+          
 
             request.AddHeader(CapgeminiPortalERCSGDWebApiHeader, CapgeminiPortalERCSGDWebApiToken);
             var response = client.Get(request);

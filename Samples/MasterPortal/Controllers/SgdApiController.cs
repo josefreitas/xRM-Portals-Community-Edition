@@ -58,5 +58,18 @@ namespace Site.Pages
 
             return result;
         }
+
+        [System.Web.Http.HttpGet]
+        public HttpResponseMessage GetDocumentSgd(int typeOfReport, string cardKey)
+        {
+            var result = new HttpResponseMessage();
+            var serviceName = Enum.GetName(typeof(TypeOfReport), typeOfReport);
+            result = SendRequest(Method.GET, serviceName, new[]
+            {
+                new Parameter("cardKey", cardKey, ParameterType.QueryString)
+            });
+
+            return result;
+        }
     }
 }
